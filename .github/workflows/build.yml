@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - '**'
+      - "**"
 
 jobs:
   build:
@@ -14,9 +14,11 @@ jobs:
         config:
         - name: Windows
           os: windows-latest
-          
-        #- name: macOS
-        #  os: macos-latest
+
+        
+        - name: iOS
+          os: macos-latest
+          target: iOS
 
         - name: Android32
           os: ubuntu-latest
@@ -25,10 +27,6 @@ jobs:
         - name: Android64
           os: ubuntu-latest
           target: Android64
-
-        - name: iOS
-          os: macos-latest
-          target: iOS
 
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
@@ -41,7 +39,7 @@ jobs:
         with:
           combine: true
           target: ${{ matrix.config.target }}
-      
+
   package:
     name: Package builds
     runs-on: ubuntu-latest
