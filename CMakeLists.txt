@@ -6,10 +6,20 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(OptimizedSongSize VERSION 1.0.0)
 
-add_library(${PROJECT_NAME} SHARED
-    src/main.cpp
-    # Add your cpp files here
+if(${GEODE_TARGET_PLATFORM} STREQUAL "iOS")
+  message(STATUS "building for ios :3c")
+  unset(CMAKE_OSX_ARCHITECTURES)
+  set(CMAKE_OSX_ARCHITECTURES arm64)
+  set(CMAKE_OSX_DEPLOYMENT_TARGET "14.0")
+  set(CMAKE_SYSTEM_NAME "iOS")
+endif()
+
+file(GLOB SOURCES
+    src/*.cpp
+    src/*.hpp
 )
+
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 if (NOT DEFINED ENV{GEODE_SDK})
     message(FATAL_ERROR "Unable to find Geode SDK! Please define GEODE_SDK environment variable to point to Geode")
