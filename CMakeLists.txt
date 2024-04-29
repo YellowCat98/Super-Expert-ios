@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-project(OptimizedSongSize VERSION 1.0.0)
+project(SuperExpert VERSION 1.0.0)
 
 if(${GEODE_TARGET_PLATFORM} STREQUAL "iOS")
   message(STATUS "building for ios :3c")
@@ -14,10 +14,11 @@ if(${GEODE_TARGET_PLATFORM} STREQUAL "iOS")
   set(CMAKE_SYSTEM_NAME "iOS")
 endif()
 
+# Set up the mod binary
 add_library(${PROJECT_NAME} SHARED
     src/main.cpp
     src/ExpertMapLayer.hpp
-    ExpertStartupLayer.hpp
+    src/ExpertStartupLayer.hpp
 )
 
 if (NOT DEFINED ENV{GEODE_SDK})
@@ -28,4 +29,5 @@ endif()
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
+# Set up dependencies, resources, link Geode
 setup_geode_mod(${PROJECT_NAME})
