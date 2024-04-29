@@ -50,7 +50,7 @@ jobs:
     needs: ['build']
 
     steps:
-      - uses: RoootTheFox/build-geode-mod@main
+      - uses: RoootTheFox/build-geode-mod/combine@main
         id: build
 
       - uses: actions/upload-artifact@v3
